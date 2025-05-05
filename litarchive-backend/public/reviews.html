@@ -1,0 +1,89 @@
+<!-- reviews.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews Feedback</title>
+    <link rel="stylesheet" href="./css and js/Library.css">
+    <style>
+        h2 {
+            border-style: solid;
+            background-color: white;
+            border: white;
+            padding: 5px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div id="rizz"><img src="./images/LitArchive_Logo.png" class="bgimg" alt="Logo"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="omsss"></div>
+            <h2>User Feedbacks</h2>
+            <!-- Section to display feedbacks -->
+            <div class="omsss">
+            <div id="feedback-list"></div>
+            </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a href="aLibrary.html">LitArchive</a>
+            <a href="feedback.html">Feedback</a>
+            <a href="about.html">About</a>
+        </div>
+    </footer>
+
+    <script>
+        // Function to display feedbacks
+        function displayFeedbacks() {
+            const feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
+            const feedbackContainer = document.getElementById('feedback-list');
+            feedbackContainer.innerHTML = '';
+
+            // If no feedback exists, display a message
+            if (feedbackList.length === 0) {
+                feedbackContainer.innerHTML = '<p>No feedback available yet.</p>';
+                return;
+            }
+
+            // Loop through all feedbacks and display each with a delete button
+            feedbackList.forEach((feedback, index) => {
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.classList.add('feedback-item');
+                feedbackDiv.innerHTML = `
+                    <div class="feedback">
+                        <p><strong>Comment:</strong> ${feedback.comment}</p>
+                        <p><strong>Rating:</strong> ${feedback.rating} / 5</p>
+                        <p><small><i>Submitted on: ${new Date(feedback.timestamp).toLocaleString()}</i></small></p>
+                        <button onclick="deleteFeedback(${index})">Delete</button>
+                    </div>
+                    <hr>
+                `;
+                feedbackContainer.appendChild(feedbackDiv);
+            });
+        }
+
+        // Function to delete a feedback
+        function deleteFeedback(index) {
+            let feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
+            feedbackList.splice(index, 1); // Remove the feedback at the given index
+            localStorage.setItem('feedbacks', JSON.stringify(feedbackList)); // Update localStorage
+            displayFeedbacks(); // Refresh the feedback list display
+        }
+
+        // Load and display feedbacks when the page loads
+        window.onload = displayFeedbacks;
+    </script>
+    <script src="./css and js/darkmode.js"></script>
+</body>
+</html>
