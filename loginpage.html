@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" href="./images/LitArchive_Logo.png" type="image/png">
+    <link rel="stylesheet" href="./css and js/loginpage.css">
+    <style href="./css and js/darkmods.css"></style>
+    <style>
+        .error-message {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: none;
+        }
+        .success-message {
+            color: #28a745;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: none;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .loading::after {
+            content: "Loading...";
+            animation: dots 1.5s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: "Loading."; }
+            40% { content: "Loading.."; }
+            60% { content: "Loading..."; }
+            80%, 100% { content: "Loading...."; }
+        }
+    </style>
+</head>
+<body background="./images/bg_1.jpg">
+        
+        <!-- Flip Card Form -->
+    <div class="wrapper">
+        <div class="card-switch">
+            <label class="switch">
+                <input type="checkbox" class="toggle">
+                <span class="slider"></span>
+                <span class="card-side"></span>
+                <div class="flip-card__inner">
+                    <div class="flip-card__front">
+                        <div class="title">Log in to LitArchive</div>
+                        <form class="flip-card__form" id="loginForm">
+                            <input class="flip-card__input" name="email" id="identifier" placeholder="Username" required>
+                            <input class="flip-card__input" name="password" id="password" placeholder="Password" type="password" required>
+                            <button class="flip-card__btn" type="submit">Let's go!</button>
+                        </form>
+                        <div id="loginError" class="error-message">Invalid username or password!</div>
+                        <div id="loginLoading" class="loading"></div>
+                    </div>
+                    <div class="flip-card__back">
+                        <div class="title">Sign up to LitArchive</div>
+                        <form class="flip-card__form" id="signupForm">
+                            <input class="flip-card__input" id="signupIdentifier" placeholder="Username" type="text" required>
+                            <input class="flip-card__input" id="signupPassword" placeholder="Password" type="password" required>
+                            <input class="flip-card__input" id="confirmPassword" placeholder="Confirm Password" type="password" required>
+                            <fieldset>
+                                <legend>Register as:</legend>
+                                <label>
+                                    <input type="radio" name="role" value="user" checked>
+                                    User
+                                </label>
+                            </fieldset>
+                            <button type="submit" class="flip-card__btn">Confirm!</button>
+                        </form>
+                        <div id="signupError" class="error-message">Error: Passwords do not match!</div>
+                        <div id="signupSuccess" class="success-message">Registration successful! You can now <a href="loginpage.html">login</a>.</div>
+                        <div id="signupLoading" class="loading"></div>
+                    </div>
+                </div>
+            </label>
+        </div>   
+    </div>
+
+    <script>
+        // Ensure admin account exists in localStorage
+        (function() {
+            let users = JSON.parse(localStorage.getItem('Users')) || {};
+            if (!users['admin']) {
+                users['admin'] = { password: 'admin123', role: 'admin' };
+                localStorage.setItem('Users', JSON.stringify(users));
+                console.log('Default admin account created: admin / admin123');
+            }
+        })();
+    </script>
+
+    <script>
+        // Function to show loading state
+        function showLoading(elementId) {
+            document.getElementById(elementId).style.display = 'block';
+        }
+
+        // Function to hide loading state
+        function hideLoading(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        // Function to show error message
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 3000);
+        }
+
+        // Function to show success message
+        function showSuccess(elementId, message) {
+            const successElement = document.getElementById(elementId);
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            showLoading('loginLoading');
+
+            const identifier = document.getElementById('identifier').value;
+            const password = document.getElementById('password').value;
+
+            // Fetch users from localStorage
+            const users = JSON.parse(localStorage.getItem('Users')) || {};
+
+            // Simulate network delay
+            setTimeout(() => {
+                hideLoading('loginLoading');
+                
+                if (users[identifier] && users[identifier].password === password) {
+                    // Store the current user object in localStorage as JSON
+                    const userObj = {
+                        username: identifier,
+                        ...users[identifier]
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(userObj));
+                    localStorage.setItem('userRole', users[identifier].role);
+                    window.location.href = users[identifier].role === 'admin' ? 'admin.html' : 'aLibrary.html';
+                } else {
+                    showError('loginError', 'Invalid username or password!');
+                }
+            }, 1000);
+        });
+
+        // Handle sign-up form submission
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            showLoading('signupLoading');
+
+            const signupIdentifier = document.getElementById('signupIdentifier').value;
+            const signupPassword = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Simulate network delay
+            setTimeout(() => {
+                hideLoading('signupLoading');
+
+                if (signupPassword !== confirmPassword) {
+                    showError('signupError', 'Error: Passwords do not match!');
+                } else {
+                    // Storing user data in localStorage
+                    let users = JSON.parse(localStorage.getItem('Users')) || {};
+                    
+                    if (users[signupIdentifier]) {
+                        showError('signupError', 'Error: Username already exists!');
+                    } else {
+                        // Get the selected role from the radio buttons
+                        const role = document.querySelector('input[name="role"]:checked').value;
+                        users[signupIdentifier] = { password: signupPassword, role: role };
+                        localStorage.setItem('Users', JSON.stringify(users));
+                        showSuccess('signupSuccess', 'Registration successful! You can now login.');
+                        
+                        // Clear form
+                        document.getElementById('signupForm').reset();
+                    }
+                }
+            }, 1000);
+        });
+
+        // Clear error messages when switching forms
+        document.querySelector('.toggle').addEventListener('change', function() {
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('signupError').style.display = 'none';
+            document.getElementById('signupSuccess').style.display = 'none';
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="websiteconnect.js"></script>
+    <script src="./css and js/darkmode.js"></script>
+</body>
+</html>

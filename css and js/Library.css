@@ -1,0 +1,1449 @@
+/* Base Styles */
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s linear;
+}
+
+/* Header Styles */
+header {
+    background-color: #004d99;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header img {
+    width: 100px;
+    height: auto;
+}
+
+#homeicon {
+    width: 50px;
+}
+
+/* Main Content Styles */
+main {
+    flex: 1;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: left;
+}
+
+/* Search and Filter Styles */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-left: 18%;
+}
+
+#searchbar {
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    width: 75%;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#search-button:hover {
+    background-color: #003366;
+}
+
+.genre-wrapper {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.genre-button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background-color: #004d99;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.genre-button:hover {
+    background-color: #003366;
+}
+
+/* Book Display Styles */
+.books-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.book-container {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.book-container::-webkit-scrollbar {
+    display: none;
+}
+
+.book-list {
+    display: flex;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.book-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 0 0 auto;
+}
+
+.book-title {
+    font-size: 1em;
+    color: #004d99;
+    margin-bottom: 5px;
+    font-weight: bold;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 130px;
+    min-height: 2.5em;
+    line-height: 1.2;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    text-shadow: 1px 2px 6px rgba(0,77,153,0.08), 0 1px 0 #fff;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #e3f0ff 0%, #f8f9fa 100%);
+    border-radius: 6px;
+    padding: 4px 8px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.book-title:hover {
+    background: #d0e7ff;
+    color: #003366;
+}
+
+.book-image {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.book-status {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    color: white;
+}
+
+.available {
+    background-color: #4caf50;
+}
+
+.checked-out {
+    background-color: #f44336;
+}
+
+/* Navigation Arrows */
+.nav-arrow {
+    background-color: #004d99;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+.nav-arrow:hover {
+    background-color: #003366;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #004d80;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-content a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 2% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-body {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+    }
+}
+
+.modal-left {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-right {
+    flex: 1;
+}
+
+.modal-book-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.modal-book-image:hover {
+    transform: scale(1.03);
+}
+
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.star-rating {
+    color: #FFD700;
+}
+
+.book-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.book-actions button {
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.borrow-button {
+    background-color: #004d99;
+    color: white;
+}
+
+.borrow-button:hover {
+    background-color: #003b77;
+    transform: translateY(-2px);
+}
+
+.borrow-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.wishlist-button {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd !important;
+}
+
+.wishlist-button:hover {
+    background-color: #e9ecef;
+}
+
+.share-button {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd !important;
+}
+
+.share-button:hover {
+    background-color: #e9ecef;
+}
+
+.book-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.book-tag {
+    background-color: #e9f5ff;
+    color: #004d99;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.modal-right h2 {
+    font-size: 2em;
+    color: #004d99;
+    font-weight: bold;
+    text-shadow: 1px 2px 8px rgba(0,77,153,0.12), 0 1px 0 #fff;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(90deg, #e3f0ff 0%, #f8f9fa 100%);
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: inline-block;
+    transition: background 0.3s, color 0.3s;
+}
+
+.modal-right h2:hover {
+    background: #d0e7ff;
+    color: #003366;
+}
+
+.modal-right h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+.book-availability {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+#modal-book-status, #modal-book-copies {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.book-details-section {
+    margin-bottom: 25px;
+}
+
+.book-details-section h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.book-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.meta-item {
+    font-size: 14px;
+    color: #555;
+}
+
+.library-location {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* Tabs Styles */
+.book-tabs {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.tab-button:hover {
+    color: #004d99;
+}
+
+.tab-button.active {
+    color: #004d99;
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #004d99;
+    border-radius: 3px 3px 0 0;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Reviews Tab */
+.review-list {
+    margin-bottom: 30px;
+}
+
+.review-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.reviewer-name {
+    font-weight: bold;
+}
+
+.review-date {
+    color: #999;
+    font-size: 14px;
+}
+
+.review-rating {
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.review-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.no-reviews {
+    color: #999;
+    font-style: italic;
+}
+
+.add-review h4 {
+    margin-bottom: 15px;
+}
+
+.rating-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.star-input {
+    display: flex;
+    gap: 5px;
+}
+
+.star-input i {
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.star-input i:hover,
+.star-input i.active {
+    color: #FFD700;
+}
+
+#review-text {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: inherit;
+}
+
+.add-review button {
+    background-color: #004d99;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.add-review button:hover {
+    background-color: #003b77;
+}
+
+/* Similar Books Tab */
+.similar-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.similar-book-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.similar-book-cover {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.similar-book-cover:hover {
+    transform: scale(1.05);
+}
+
+.similar-book-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.similar-book-author {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Borrowing History Tab */
+.borrowing-history table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.borrowing-history th,
+.borrowing-history td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.borrowing-history th {
+    font-weight: bold;
+    color: #333;
+}
+
+.borrowing-history td {
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px;
+        margin: 5% auto;
+    }
+    
+    .modal-left {
+        flex: none;
+        width: 100%;
+    }
+    
+    .modal-book-image {
+        height: 300px;
+    }
+    
+    .book-meta {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-buttons {
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    
+    .similar-books {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+/* Library Hours Display */
+.library-hours {
+    position: relative;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.library-hours::before {
+    content: "🕒";
+    margin-right: 5px;
+}
+
+/* Available Books Count Display */
+.available-count-display {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Category Select */
+.catg {
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #ccc;
+    border-left: none;
+    font-size: 1em;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Dark Mode Styles */
+body.dark {
+    background-color: rgb(44, 41, 41);
+}
+
+body.dark h1, 
+body.dark .support a {
+    color: #fff;
+}
+
+/* Dark Mode Toggle */
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox-label {
+    background-color: #111;
+    width: 50px;
+    height: 26px;
+    border-radius: 50px;
+    position: relative;
+    padding: 0 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 4px;
+}
+
+.fa-moon, .fa-sun {
+    z-index: 2;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.checkbox-label .ball {
+    background-color: #fff;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+    z-index: 1;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+    transform: translateX(24px);
+}
+
+.prof {
+    width: 250px;
+    height: 200px;
+    padding: 10px;
+    vertical-align: middle;
+    color: black;
+    padding-left: 10px;
+}
+
+.profile {
+    height: 100px;
+    width: 100px;
+    
+    border: 5px  solid #333 ;
+}
+
+.exit {
+    position: relative;
+    top: -15%;
+    left: -2%;
+    color: black;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.genre-wrapper-genre {
+    margin-bottom: 20px;
+    text-align: center;
+    padding-top: 2.5% ;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.profe {
+    width: 250px;
+    height: 200px;
+    padding: 10px;
+    vertical-align: middle;
+    color: black;
+    padding-left: 10px;
+}
+
+.genre-wrappere {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.genre-buttone {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    background-color: #004d99;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.contente {
+    position: relative;
+    display:flex;
+    background: white;
+    padding: 1em 2em;
+    border-radius: 4px;
+    color: black;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-picture {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    margin: 5px 0;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+}
+
+.action-buttons button.logout-button {
+    background-color: #dc3545;
+}
+
+#update-form {
+    margin-top: 20px;
+}
+
+#update-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#update-form input[type="text"],
+#update-form input[type="email"],
+#update-form input[type="tel"],
+#update-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#borrowed-books-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#borrowed-books-list li {
+    background: #f1f1f1;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-icon {
+    cursor: pointer;
+    width: 50px;  /* Set the width you want (adjust as needed) */
+    height: 50px; /* Set the height to be the same as width to maintain a square (1x1 ratio) */
+    object-fit: cover;  /* Ensure the image maintains its aspect ratio and fills the square */
+    border-radius: 50%; /* Makes the image round */
+}
+
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: -60%; /* Aligns the dropdown to the left of the profile icon */
+    margin-right: 10px; /* Optional space adjustment */
+}
+
+.dropdown-info {
+    display: flex;
+    align-items: center;
+    padding: 10px; /* Optional padding */
+}
+
+    .dropdown-profile-image {
+        width: 50px;  /* Set the width you want */
+        height: 50px; /* Set the height to be the same as width to maintain a square (1x1 ratio) */
+        object-fit: cover;  /* Ensure the image maintains its aspect ratio and fills the square */
+        border-radius: 50%; /* Makes the image round */
+    }
+
+.dropdown-name {
+    font-weight: bold;
+    color: #333; /* Change color as needed */
+    padding-left: 7px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Feedback Form Background Styling */
+#feedback-form {
+    background-color: #f4f4f9;  /* Light grey background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+    position: relative;  /* Required for absolute positioning of the exit button */
+}
+
+/* Exit Button in top-right corner */
+#close-feedback-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Feedback Form Styling */
+#feedback-form h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Button to open the feedback form */
+#open-feedback-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Close button hover effect */
+#close-feedback-btn:hover {
+    color: red;
+}
+
+/* Modal Animation (Optional) */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.modal-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.bgimg {
+    border-style: solid;
+    padding: 2px;
+    border: white;
+    background-color: white;
+    border-radius: 5px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {box-sizing: border-box;}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  transition: background 0.2s linear;
+}
+
+body.dark {background-color: rgb(44, 41, 41);} /* #9b59b6 */
+
+body.dark h1, body.dark .support a {color: #fff;}
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-label {
+  background-color: #111;
+  width: 50px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 0 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 4px;
+}
+
+.fa-moon, .fa-sun {
+  z-index: 2;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+  z-index: 1;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
+}
+
+.omsss {
+    border-style: solid;
+    padding: 10px;
+    background-color: white;
+    border: white;
+    border-radius: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-book-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-details {
+    text-align: left;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.book-status {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.available {
+    background-color: #4caf50;
+    color: white;
+}
+
+.checked-out {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Keyframes for swinging motion */
+@keyframes swing {
+    0% {
+        transform: rotate(0deg); /* Start at neutral position */
+    }
+    25% {
+        transform: rotate(8deg); /* Swing right */
+    }
+    50% {
+        transform: rotate(0deg); /* Return to center */
+    }
+    75% {
+        transform: rotate(-8deg); /* Swing left */
+    }
+    100% {
+        transform: rotate(0deg); /* Return to center */
+    }
+}
+
+/* Library hours style */
+.library-hours {
+    position: relative; /* Position relative for the swing effect */
+    background-color: white;
+    color: #004d99;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: swing 3s ease-in-out infinite; /* Swing animation */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+/* Circle above the library hours (simulating a rope) */
+.library-hours::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Position above the element */
+    left: 50%;
+    transform: translateX(-50%); /* Center the circle horizontally */
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Rope simulation */
+.library-hours::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 20px;
+    background-color: #333;
+}
+
+.return-timer {
+    font-size: 16px;
+    color: white;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+.modal .close-button {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+#popup-search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#available-books-list {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#available-books-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.borrow-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.borrow-button:hover {
+    background-color: #45a049;
+}
+
+.close-button {
+    font-size: 50px;
+    margin-left: 95%;
+}
+
+.req {
+    padding: 10px;
+}
+
+.catg {
+    margin-left: 10px;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: #004d80;
+    color: white;
+    padding: 3px;
+}
+
+/* Basic popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.popup-content {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Button to open the popup */
+#view-approved-books {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+#approved-books-list li {
+    margin-bottom: 20px;
+}
+
+#approved-books-list img {
+    width: 100px;
+    height: auto;
+}
+
+#approved-books-list div {
+    display: flex;
+    align-items: center;
+}
+
+#approved-books-list h3 {
+    margin-left: 10px;
+}
+
+#countdown {
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+}
+#book-requests-list li, #approved-books-list li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#book-requests-list img, #approved-books-list img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+#book-requests-list div, #approved-books-list div {
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+p {
+    margin: 5px 0;
+}
+
+#countdown {
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+}
+
+#book-requests-list img, #approved-books-list img {
+    width: 100px;
+    height: auto;
+}
