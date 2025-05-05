@@ -175,6 +175,54 @@ switch ($endpoint) {
             echo json_encode(['error' => 'Method not allowed']);
         }
         break;
+    case 'users':
+        if ($method === 'GET') {
+            if ($id) {
+                $stmt = $connection->prepare("SELECT * FROM users WHERE id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $user = $result->fetch_assoc();
+                echo json_encode($user);
+            } else {
+                $result = $connection->query("SELECT * FROM users");
+                $users = $result->fetch_all(MYSQLI_ASSOC);
+                echo json_encode($users);
+            }
+        } elseif ($method === 'POST') {
+            $data = getInput();
+            $stmt = $connection->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+            $stmt->bind_param('ss', $data['username'], password_hash($data['password'], PASSWORD_BCRYPT));
+            if ($stmt->execute()) {
+                echo json_encode(['message' => 'User added successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => 'Failed to add user']);
+            }
+        } elseif ($method === 'PUT' && $id) {
+            $data = getInput();
+            $stmt = $connection->prepare("UPDATE users SET username = ?, password = ? WHERE id = ?");
+            $stmt->bind_param('ssi', $data['username'], password_hash($data['password'], PASSWORD_BCRYPT), $id);
+            if ($stmt->execute()) {
+                echo json_encode(['message' => 'User updated successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => 'Failed to update user']);
+            }
+        } elseif ($method === 'DELETE' && $id) {
+            $stmt = $connection->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->bind_param('i', $id);
+            if ($stmt->execute()) {
+                echo json_encode(['message' => 'User deleted successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => 'Failed to delete user']);
+            }
+        } else {
+            http_response_code(405);
+            echo json_encode(['error' => 'Method not allowed']);
+        }
+        break;
     default:
         http_response_code(404);
         echo json_encode(['error' => 'Resource not found']);
